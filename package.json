@@ -1,0 +1,16 @@
+{
+  "name": "language-wisl",
+  "version": "0.0.0",
+  "description": "WISL (While In Separation Logic) language package for Atom",
+  "keywords": [
+    "language",
+    "grammar",
+    "wisl",
+    "separation logic"
+  ],
+  "repository": "https://github.com/giltho/language-wisl.git",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  }
+}
