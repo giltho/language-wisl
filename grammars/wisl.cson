@@ -5,13 +5,13 @@
 ]
 'patterns': [
   {
-    'include': '#statements'
-  }
-  {
     'include': '#functions'
   }
   {
     'include': '#comments'
+  }
+  {
+    'include': '#statements'
   }
 ]
 'repository':
@@ -101,11 +101,26 @@
         'include': '#statements'
       }
     ]
-  'statements':
+  'records':
     'patterns': [
+      {
+        'match': '\\b([a-zA-Z][a-zA-Z_]*)\\s*(:)'
+        'captures':
+          '1':
+            'name': 'entity.name.property.wisl'
+          '2':
+            'name': 'keyword.operator.assignment.wisl'
+      }
       {
         'include': '#expressions'
       }
+      {
+        'match': ','
+        'name': 'meta.delimiter.parameter.comma.wisl'
+      }
+    ]
+  'statements':
+    'patterns': [
       {
         'include': '#control_blocks'
       }
@@ -114,20 +129,20 @@
         'name': 'keyword.control.wisl'
       }
       {
-        'match': '\\bnew\\b(?=\\s*\\()'
-        'name': 'keyword.other.delete.wisl'
+        'begin': '\\b(new)\\b\\s*\\('
+        'beginCaptures':
+          '1':
+            'name': 'keyword.other.new.wisl'
+        'end': '\\)'
+        'patterns': [
+          {
+            'include': '#records'
+          }
+        ]
       }
       {
         'match': '\\b([a-zA-Z][a-zA-Z_]*)\\b(?=\\s*\\()'
         'name': 'entity.name.function.wisl'
-      }
-      {
-        'match': '\\b([a-zA-Z][a-zA-Z_]*)\\s*(:)'
-        'captures':
-          '1':
-            'name': 'entity.name.property.wisl'
-          '2':
-            'name': 'keyword.operator.assignment.wisl'
       }
       {
         'match': ','
@@ -168,6 +183,19 @@
           {
             'match': ';'
             'name': 'invalid.illegal.terminator.statement.wisl'
+          }
+        ]
+      }
+      {
+        'include': '#expressions'
+      }
+      {
+        'begin': '{'
+        'end': '}'
+        'name': 'meta.section.logic'
+        'patterns': [
+          {
+            'include': '#statements'
           }
         ]
       }
@@ -255,16 +283,20 @@
         'endCaptures':
           '0':
             'name': 'meta.brace.round.wisl'
-        'patterns':
+        'patterns': [
           {
             'include': '#expressions'
           }
+        ]
       }
       {
         'include': '#operators'
       }
       {
         'include': '#values'
+      }
+      {
+        'include': '#variables'
       }
     ]
   'operators':
@@ -313,9 +345,28 @@
         'patterns': [
           {
             'match': '[^"]*[^\\n\\r"\\\\]$'
-            'name': 'invalid.illegal.string.js'
+            'name': 'invalid.illegal.string.wisl'
           }
         ]
+      }
+    ]
+  'variables':
+    'patterns': [
+      {
+        'match': '\\b(ret)\\b'
+        'name': 'variable.language.wisl'
+      }
+      {
+        'match': 'x__ret'
+        'name': 'invalid.illegal.variable.wisl'
+      }
+      {
+        'match': '\\b[a-zA-Z][a-zA-Z_]*\\b'
+        'name': 'variable.program.wisl'
+      }
+      {
+        'match': '#[a-zA-Z][a-zA-Z_]*\\b'
+        'name': 'variable.logical.wisl'
       }
     ]
     
