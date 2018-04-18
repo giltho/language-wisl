@@ -1,6 +1,6 @@
 {
   "name": "language-wisl",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "WISL (While In Separation Logic) language package for Atom",
   "keywords": [
     "language",
