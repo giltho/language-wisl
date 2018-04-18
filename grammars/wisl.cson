@@ -25,7 +25,7 @@
   'function_innards':
     'patterns': [
       {
-        'match': '(?:\\s*)?\\b(function|predicate)\\b(?:\\s*)([a-zA-Z][a-zA-Z_]*)\\b(?=\\s*\\()'
+        'match': '(?:\\s*)?\\b(function|predicate|lemma)\\b(?:\\s*)([a-zA-Z][a-zA-Z_]*)\\b(?=\\s*\\()'
         'captures':
           '1':
             'name': 'storage.type.$1.wisl'
@@ -40,7 +40,7 @@
       }
     ]
   'functions':
-    'begin': '(?=(?:\\s*)?\\b(function|predicate)\\b(?:\\s*)([a-zA-Z][a-zA-Z_]*)\\b(?:\\s*\\())'
+    'begin': '(?=(?:\\s*)?\\b(function|predicate|lemma)\\b(?:\\s*)([a-zA-Z][a-zA-Z_]*)\\b(?:\\s*\\())'
     'end': '(?<=})'
     'name': 'meta.$1.wisl'
     'patterns': [
@@ -121,6 +121,14 @@
     ]
   'statements':
     'patterns': [
+      {
+        'match': '(proof|variant|hypothesis|conclusions)\\s*(:)'
+        'captures':
+          '1':
+            'name': 'keyword.control.logic.wisl'
+          '2':
+            'name': 'punctuation.logic.colon.wisl'
+      }
       {
         'include': '#control_blocks'
       }
