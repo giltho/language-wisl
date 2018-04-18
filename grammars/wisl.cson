@@ -190,8 +190,16 @@
         'include': '#expressions'
       }
       {
-        'begin': '{'
+        'begin': '({)\\s*(invariant|post|pre)\\s*:'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.definition.logic.begin.bracket.curly.wisl'
+          '2':
+            'name': 'keyword.control.logic.wisl'
         'end': '}'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.logic.end.bracket.curly.wisl'
         'name': 'meta.section.logic'
         'patterns': [
           {
@@ -297,6 +305,22 @@
       }
       {
         'include': '#variables'
+      }
+      {
+        'begin': '\\['
+        'beginCaptures':
+          '0':
+            'name': 'meta.brace.square.wisl'
+        'end': '\\]'
+        'endCaptures':
+          '0':
+            'name': 'meta.brace.square.wisl'
+        'name': 'list.wisl'
+        'patterns': [
+          {
+            'include': '#expressions'
+          }
+        ]
       }
     ]
   'operators':
